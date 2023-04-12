@@ -1,5 +1,7 @@
 import streamlit as st
 import requests
+import os
+
 
 def main():
     st.title("SEC Filing Information")
@@ -48,8 +50,8 @@ def main():
             st.write("Use of Proceeds: ", use_of_proceeds)
 
         if file_upload is not None:
-            pinata_api_key = "YOUR_PINATA_API_KEY"
-            pinata_secret_api_key = "YOUR_PINATA_SECRET_API_KEY"
+            pinata_api_key = os.environ.get("YOUR_PINATA_API_KEY")
+            pinata_secret_api_key = os.environ.get("YOUR_PINATA_SECRET_API_KEY")
             endpoint = "https://api.pinata.cloud/pinning/pinFileToIPFS"
 
             headers = {
