@@ -43,9 +43,9 @@ def main():
 
         # Provide feedback on correctness
         if user_response.lower() == expected_answer.lower():
-            st.write("✅ Your answer is correct!")
+            st.write("✅ Your answer is acceptable.")
         else:
-            st.write("❌ Your answer is incorrect.")
+            st.write("❌ Your answer is not acceptable.")
 
 # Run the app
 if __name__ == "__main__":
