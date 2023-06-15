@@ -2,7 +2,7 @@ import streamlit as st
 import openai
 
 # Set up OpenAI API credentials
-openai.api_key = 'YOUR_API_KEY'
+openai.api_key = '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'
 
 # Define the tax law question and expected answer
 question = "What is the maximum annual contribution limit for a traditional IRA in 2023?"
@@ -20,7 +20,7 @@ def generate_critique(response):
         frequency_penalty=0.0,
         presence_penalty=0.0
     )
-    critique = response.choices[0].text.strip().split("Critique:")[1].strip()
+    critique = response.choices[0].text.strip().split(":")[-1].strip()
     return critique
 
 # Streamlit app
