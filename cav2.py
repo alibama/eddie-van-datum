@@ -2,7 +2,7 @@ import streamlit as st
 import openai
 
 # Set up OpenAI API credentials
-openai.api_key = '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'
+openai.api_key = 'OPENAI'
 
 # Define the quiz question and expected answer
 question = "Explain the steps involved in calculating the net present value (NPV) of an investment project."
