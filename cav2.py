@@ -57,6 +57,10 @@ def main():
         critique = generate_critique(user_answer)
         st.subheader("Critique:")
         st.write(critique)
+        rating = generate_rating(user_answer)
+        st.subheader("Rating:")
+        st.write(rating)
+
 
         # Provide feedback on the quality of the answer
         if user_answer.lower() == expected_answer.lower():
