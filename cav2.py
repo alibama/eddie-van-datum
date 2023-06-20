@@ -53,10 +53,10 @@ def main():
     user_answer = st.text_area("Your Answer:", height=200)
 
     # Critique the user's answer
-   # if user_answer:
-   #     critique = generate_critique(user_answer)
-   #     st.subheader("Critique:")
-    #    st.write(critique)
+    if user_answer:
+        critique = generate_critique(user_answer)
+        st.subheader("Critique:")
+        st.write(critique)
     #    rating = generate_rating(user_answer)
     #    st.subheader("Rating:")
     #    st.write(rating)
