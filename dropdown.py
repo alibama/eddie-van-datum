@@ -1,8 +1,18 @@
 import streamlit as st
 import openai
+from googletrans import Translator
 
 # Set up your OpenAI API credentials
 openai.api_key = st.secrets["OPENAI"]
+
+
+# Set up your OpenAI API credentials
+openai.api_key = 'YOUR_API_KEY'
+
+def translate_text(text, target_language):
+    translator = Translator()
+    translation = translator.translate(text, dest=target_language)
+    return translation.text
 
 def get_openai_response(prompt, temperature, language):
     response = openai.Completion.create(
@@ -27,25 +37,23 @@ def main():
 
     user_idea = st.text_area("Your Idea")
 
-    language = st.selectbox("Choose the language:", ("Arabic", "Spanish", "French", "Chinese"))
+    language = st.selectbox("Choose the language:", ("English", "Arabic", "Spanish", "French", "Chinese"))
 
     if user_idea:
-        if language == "Arabic":
-            prompt = f"Your idea on managing rising housing costs: {user_idea}\n\nResponse:"
+        if language != "English":
+            # Translate the user's idea to English for OpenAI processing
+            translated_idea = translate_text(user_idea, 'en')
+        else:
+            translated_idea = user_idea
+
+        if language == "English":
+            prompt = f"Your idea on managing rising housing costs: {translated_idea}\n\nResponse:"
             temperature = 0.2
-            selected_language = "ar"
-        elif language == "Spanish":
-            prompt = f"Your idea on managing rising housing costs: {user_idea}\n\nResponse:"
+            selected_language = "en"
+        else:
+            prompt = f"Your idea on managing rising housing costs: {translated_idea}\n\nResponse:"
             temperature = 0.2
-            selected_language = "es"
-        elif language == "French":
-            prompt = f"Your idea on managing rising housing costs: {user_idea}\n\nResponse:"
-            temperature = 0.2
-            selected_language = "fr"
-        elif language == "Chinese":
-            prompt = f"Your idea on managing rising housing costs: {user_idea}\n\nResponse:"
-            temperature = 0.2
-            selected_language = "zh"
+            selected_language = language.lower()
 
         response = get_openai_response(prompt, temperature, selected_language)
 
@@ -53,7 +61,7 @@ def main():
         st.write(response)
 
         # Generate a suggested compromise from the user's idea
-        compromise_prompt = f"Your idea on managing rising housing costs: {user_idea}\n\nSuggested Compromise:"
+        compromise_prompt = f"Your idea on managing rising housing costs: {translated_idea}\n\nSuggested Compromise:"
         compromise_response = get_openai_response(compromise_prompt, temperature=0.5, language=selected_language)
 
         st.write("Suggested Compromise:")
@@ -72,3 +80,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
