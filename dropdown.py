@@ -2,7 +2,7 @@ import streamlit as st
 import openai
 
 # Set up your OpenAI API credentials
-openai.api_key = 'YOUR_API_KEY'
+openai.api_key = st.secrets["OPENAI"]
 
 def get_openai_response(prompt, temperature):
     response = openai.Completion.create(
