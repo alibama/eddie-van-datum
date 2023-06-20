@@ -63,10 +63,10 @@ def main():
 
 
         # Provide feedback on the quality of the answer
-        if user_answer.lower() == expected_answer.lower():
-            st.write("✅ Your answer is acceptable!")
-        else:
-            st.write("❌ Your answer is not acceptable.")
+    if user_answer.lower() == expected_answer.lower():
+        st.write("✅ Your answer is acceptable!")
+    else:
+        st.write("❌ Your answer is not acceptable.")
 
 # Run the app
 if __name__ == "__main__":
